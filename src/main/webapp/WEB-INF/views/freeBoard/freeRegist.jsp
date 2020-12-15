@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"
 %>
 
-<%@ include file="/WEB-INF/views/include/header.jsp"%>
 <section>
 	<div class="container">
 		<div class="row">
@@ -45,4 +44,3 @@
 		</div>
 	</div>
 </section>
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>

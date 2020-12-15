@@ -23,7 +23,9 @@ public class BoardController {
 	FreeBoardService fs;
 	
 	// 글 목록 화면
-	@RequestMapping("freeList")
+	
+
+	@RequestMapping(value =  {"freeList","/",""})
 	public String boardListWin(@ModelAttribute("pageVO") PageVO pageVO, Model model) {				
 		
 		List<FreeBoardVO> list;

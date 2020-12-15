@@ -14,7 +14,6 @@ public class FreeBoardVO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
 	public FreeBoardVO(int num, String title, String writer, String content, Timestamp regdate, Timestamp alterdate) {
 		super();
 		this.num = num;
@@ -24,7 +23,6 @@ public class FreeBoardVO {
 		this.regdate = regdate;
 		this.alterdate = alterdate;
 	}
-
 
 	public int getNum() {
 		return num;

@@ -3,7 +3,6 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
     
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
     <section>
         <div class="container">
             <div class="row">
@@ -48,4 +47,3 @@
             </div>
         </div>
         </section>
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>

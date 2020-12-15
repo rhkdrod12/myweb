@@ -36,4 +36,14 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping("/aaa")
+	public String aaa() {
+		return "aaa";
+	}
+	
+	@RequestMapping("/baseDefault")
+	public String base() {
+		return "baseDefault";
+	}
+	
 }

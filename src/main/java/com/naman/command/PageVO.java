@@ -21,8 +21,6 @@ public class PageVO {
 	private String search;			//검색 데이터
 	private String searchOption;	//검색 옵션
 	 
-	
-	
 	public PageVO() {
 		// TODO Auto-generated constructor stub
 	}

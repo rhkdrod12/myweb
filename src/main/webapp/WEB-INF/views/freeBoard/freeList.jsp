@@ -3,7 +3,7 @@
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ include file="/WEB-INF/views/include/header.jsp"%>
+
 
 <section>
 	<div class="container-fluid">
@@ -19,8 +19,8 @@
 				<form action="freeList" method="get">
 					<div class="search-wrap">
 						<button type="submit" class="btn btn-info search-btn">검색</button>
-						<input type="text" name="search" class="form-control search-input">
-						<select name="searchOption" class="form-control search-select">
+						<input type="text" value="${pageVO.search }" name="search" class="form-control search-input">
+						<select id="searchOption" name="searchOption" class="form-control search-select">
 							<option value="1">제목</option>
 							<option value="2">내용</option>
 							<option value="3">작성자</option>
@@ -77,5 +77,7 @@
 	</div>
 </section>
 
-<%@ include file="/WEB-INF/views/include/footer.jsp"%>
-
+<script type="text/javascript">
+	var s = document.getElementById("searchOption");
+	s.options[${pageVO.searchOption-1}].selected = true;
+</script>

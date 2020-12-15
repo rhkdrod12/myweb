@@ -14,11 +14,34 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-
+	
+	<!-- 두 개 이상의 뷰 리졸버를 설정하려면 UrlBasedViewResolver(뷰 리졸브의 상위 객체)가 필요함 -->
+	<!-- request - controller - 타일즈 뷰 - 기존 리졸브 뷰로 동작할것임 -->	
+	<!-- 해당 리졸브 뷰가 잡지 못하면 다음 리졸브 뷰가 작동 -->
+	
+	<!-- 타일즈 설정 -->
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer" >
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	
+	<!-- 타일즈 뷰 설정 -->
+	<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"></beans:property>
+		<beans:property name="order" value="1"></beans:property>	<!-- 뷰 리졸브를 동작시킬 순서 지정 -->
+	</beans:bean>
+	
+	
+	<!-- 기존 뷰 리졸버 -->
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2"></beans:property>
 	</beans:bean>
 	
 	<!-- 빈으로 만들 객체들이 있는 패키지 위치 선언 -->
