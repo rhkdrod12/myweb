@@ -1,0 +1,9 @@
+create table freeboard(
+    num number(10) constraint freeboard_pk primary key,
+    title varchar2(50) not null,
+    writer varchar2(50) not null,
+    content varchar2(2000),
+    regdate date,
+    alterdate date
+);
+create sequence freeboard_seq start with 1 INCREMENT BY 1 NOCACHE;

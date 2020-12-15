@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.naman.mapper.FreeBoardMapper">
+	
+	<!-- 전체 리스트 요청 -->
+	<select id="getList" resultType="freeBoardVO">
+		select num, title, writer, regdate, alterdate from freeboard order by num desc
+	</select>
+	
+	<!-- 페이지 리스트 요청 -->
+	<select id="getPageList" resultType="freeBoardVO">
+		select num, title, writer, regdate, alterdate 
+		from (
+			select rownum rnum, a.* 
+				from (select * from freeboard a order by num desc) a
+			) 
+		where rnum between #{startBno} and #{endBno}
+	</select>
+	
+	<!-- 페이지 검색 요청 -->
+	<select id="getSearchList" resultType="freeBoardVO">
+		select num, title, writer, regdate, alterdate 
+		from (
+			select rownum rnum, a.* 
+				from (
+					select * from freeboard a 
+					<where>
+						<if test="searchOption == 1">and title like '%'||#{search}||'%'</if>
+						<if test="searchOption == 2">and content like '%'||#{search}||'%'</if>
+						<if test="searchOption == 3">and writer like '%'||#{search}||'%'</if>
+						<if test="searchOption == 4">and title like '%'||#{search}||'%' and content like '%'||#{search}||'%'</if>
+					</where>
+						order by num desc
+					) a
+			) 
+		where rnum between #{startBno} and #{endBno}
+	</select>
+	
+	<!-- 총 데이터 수 요청 -->
+	<select id="getTotal" resultType="Integer">
+		select count(*) from freeboard
+			<where>
+				<if test="searchOption == 1">and title like '%'||#{search}||'%'</if>
+				<if test="searchOption == 2">and content like '%'||#{search}||'%'</if>
+				<if test="searchOption == 3">and writer like '%'||#{search}||'%'</if>
+				<if test="searchOption == 4">and title like '%'||#{search}||'%' and content like '%'||#{search}||'%'</if>
+			</where>
+	</select>
+	
+	<!-- 단일 데이터 요청 -->
+	<select id="getData" resultType="freeBoardVO">
+		select * from freeboard where num = #{num} 
+	</select>
+	
+	<!-- 데이터 등록 -->
+	<insert id="regist">	
+		<selectKey keyProperty="num" resultType="Integer" order="BEFORE" >
+			select freeboard_seq.nextval from dual
+		</selectKey>
+		insert into freeboard(num, title, writer, content, regdate, alterdate ) values(#{num}, #{title}, #{writer}, #{content}, sysdate, sysdate)
+	</insert>
+	
+	<!-- 데이터 수정 -->	 
+	<update id="modify">
+		update freeboard set title=#{title}, content=#{content}, alterdate=sysdate where num=#{num}
+	</update>
+	
+	<!-- 데이터 삭제 -->
+	<delete id="delete">
+		delete from freeboard where num=#{num}
+	</delete>
+	
+
+</mapper>
