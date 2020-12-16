@@ -1,4 +1,4 @@
-package com.naman.service;
+package com.naman.freeboard.service;
 
 import java.util.List;
 
@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.naman.command.FreeBoardVO;
 import com.naman.command.PageVO;
-import com.naman.mapper.FreeBoardMapper;
+import com.naman.freeboard.mapper.FreeBoardMapper;
 
-@Service
+
+@Service("freeBoardService")
 public class FreeBoardServiceImpl implements FreeBoardService {
 
 	@Autowired
@@ -23,9 +24,7 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	
 	//필요없을 것으로 보임
 	public List<FreeBoardVO> getPageList(PageVO page){
-		
-		System.out.println(page.getPage());
-		
+				
 		//페이지 연산부분
 		int totalBno = fm.getTotal(page);
 		page.setTotalBno(totalBno);
@@ -47,9 +46,9 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 	}
 	
 	@Override
-	public FreeBoardVO getData(int index) {
+	public FreeBoardVO getContent(int index) {
 		// TODO Auto-generated method stub
-		return fm.getData(index);
+		return fm.getContent(index);
 	}
 
 	@Override

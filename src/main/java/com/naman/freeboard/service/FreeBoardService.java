@@ -1,4 +1,4 @@
-package com.naman.service;
+package com.naman.freeboard.service;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface FreeBoardService {
 	public List<FreeBoardVO> getPageList(PageVO page);
 	public List<FreeBoardVO> getSearchList(PageVO page);
 	
-	public FreeBoardVO getData(int index);
+	public FreeBoardVO getContent(int index);
 	public int regist(FreeBoardVO vo);
 	public boolean modify(FreeBoardVO vo);
 	public boolean delete(int index);

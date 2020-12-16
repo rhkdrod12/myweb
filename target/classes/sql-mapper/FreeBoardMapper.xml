@@ -5,14 +5,14 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.naman.mapper.FreeBoardMapper">
+<mapper namespace="com.naman.freeboard.mapper.FreeBoardMapper">
 	
 	<!-- 전체 리스트 요청 -->
-	<select id="getList" resultType="freeBoardVO">
+	<!-- <select id="getList" resultType="freeBoardVO">
 		select num, title, writer, regdate, alterdate from freeboard order by num desc
 	</select>
 	
-	<!-- 페이지 리스트 요청 -->
+	페이지 리스트 요청
 	<select id="getPageList" resultType="freeBoardVO">
 		select num, title, writer, regdate, alterdate 
 		from (
@@ -20,7 +20,7 @@
 				from (select * from freeboard a order by num desc) a
 			) 
 		where rnum between #{startBno} and #{endBno}
-	</select>
+	</select> -->
 	
 	<!-- 페이지 검색 요청 -->
 	<select id="getSearchList" resultType="freeBoardVO">
@@ -30,10 +30,10 @@
 				from (
 					select * from freeboard a 
 					<where>
-						<if test="searchOption == 1">and title like '%'||#{search}||'%'</if>
-						<if test="searchOption == 2">and content like '%'||#{search}||'%'</if>
-						<if test="searchOption == 3">and writer like '%'||#{search}||'%'</if>
-						<if test="searchOption == 4">and title like '%'||#{search}||'%' and content like '%'||#{search}||'%'</if>
+						<if test="searchOption == 0">title like '%'||#{search}||'%'</if>
+						<if test="searchOption == 1">content like '%'||#{search}||'%'</if>
+						<if test="searchOption == 2">writer like '%'||#{search}||'%'</if>
+						<if test="searchOption == 3">title like '%'||#{search}||'%' or content like '%'||#{search}||'%'</if>
 					</where>
 						order by num desc
 					) a
@@ -45,15 +45,15 @@
 	<select id="getTotal" resultType="Integer">
 		select count(*) from freeboard
 			<where>
-				<if test="searchOption == 1">and title like '%'||#{search}||'%'</if>
-				<if test="searchOption == 2">and content like '%'||#{search}||'%'</if>
-				<if test="searchOption == 3">and writer like '%'||#{search}||'%'</if>
-				<if test="searchOption == 4">and title like '%'||#{search}||'%' and content like '%'||#{search}||'%'</if>
+				<if test="searchOption == 0">title like '%'||#{search}||'%'</if>
+				<if test="searchOption == 1">content like '%'||#{search}||'%'</if>
+				<if test="searchOption == 2">writer like '%'||#{search}||'%'</if>
+				<if test="searchOption == 3">title like '%'||#{search}||'%' or content like '%'||#{search}||'%'</if>
 			</where>
 	</select>
 	
 	<!-- 단일 데이터 요청 -->
-	<select id="getData" resultType="freeBoardVO">
+	<select id="getContent" resultType="freeBoardVO">
 		select * from freeboard where num = #{num} 
 	</select>
 	

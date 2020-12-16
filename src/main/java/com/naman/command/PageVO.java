@@ -52,7 +52,7 @@ public class PageVO {
 		prevPage = startPage > 1;
 		nextPage = endPage < totalPage;
 		
-		startBno = (page-1)*bnoAmount;
+		startBno = (page-1)*bnoAmount+1;
 		endBno = page*bnoAmount;
 	}
 

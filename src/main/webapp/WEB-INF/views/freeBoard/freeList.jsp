@@ -18,13 +18,14 @@
 				<!--form select를 가져온다 -->
 				<form action="freeList" method="get">
 					<div class="search-wrap">
+						<span style="float:left">게시글 수: ${pageVO.totalBno}</span>
 						<button type="submit" class="btn btn-info search-btn">검색</button>
 						<input type="text" value="${pageVO.search }" name="search" class="form-control search-input">
 						<select id="searchOption" name="searchOption" class="form-control search-select">
-							<option value="1">제목</option>
-							<option value="2">내용</option>
-							<option value="3">작성자</option>
-							<option value="4">제목+내용</option>
+							<option value="0">제목</option>
+							<option value="1">내용</option>
+							<option value="2">작성자</option>
+							<option value="3">제목+내용</option>
 						</select>
 					</div>
 				</form>
@@ -42,16 +43,16 @@
 					<tbody>
 						<c:if test="${list.isEmpty()}">
 							<tr>
-								<td colspan="5" align="center">-- 공 백  --</td>
+								<td colspan="5" align="center">-- 없 음  --</td>
 							<tr>
 						</c:if>
-						<c:forEach var="board" items="${list}">
+						<c:forEach var="boardVO" items="${list}">
 							<tr>
-								<td>${board.num}</td>
-								<td><a href="freeDetail?page=${board.num}">${board.title}</a>	</td>
-								<td>${board.writer}</td>
-								<td><fmt:formatDate value="${board.regdate}" pattern="yyyy년 MM월 dd일 HH:mm"/> </td>
-								<td><fmt:formatDate value="${board.alterdate}" pattern="yyyy년 MM월 dd일 HH:mm"/></td>
+								<td>${boardVO.num}</td>
+								<td><a href="freeDetail?page=${boardVO.num}">${boardVO.title}</a>	</td>
+								<td>${boardVO.writer}</td>
+								<td><fmt:formatDate value="${boardVO.regdate}" pattern="yyyy년 MM월 dd일 HH:mm"/> </td>
+								<td><fmt:formatDate value="${boardVO.alterdate}" pattern="yyyy년 MM월 dd일 HH:mm"/></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -78,6 +79,24 @@
 </section>
 
 <script type="text/javascript">
+
 	var s = document.getElementById("searchOption");
-	s.options[${pageVO.searchOption-1}].selected = true;
+	var num = ${pageVO.searchOption!=null?pageVO.searchOption:0};
+	s.options[num].selected = true;
+	
+	s.onchange = function() {
+		document.querySelector("input[name='search']").value = '';
+	}
+
+	window.onload = function() {
+		if (history.state === '')
+			return;
+		else{
+			var msg = "${msg}";
+			if (msg !== "") {
+				alert(msg);
+				history.replaceState('', null, null);
+			}	
+		}
+	}
 </script>

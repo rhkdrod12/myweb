@@ -61,7 +61,6 @@
 	                              
 	                              <button type="button" class="right btn btn-info">등록하기</button>
 	                        </div>
-	
 	                    </div>
                         </form>
 
@@ -113,3 +112,19 @@
 			</div>
 		</div>
 	</div>
+
+<script type="text/javascript">
+	window.onload = function(){
+		if(history.state === '') return;	
+		//아래서 state에 대해서 공백처리했기 때문에 공백을 가지고 있을 것임
+		//원래는 어떤 처리값을 가지고 잇을 것임
+		
+		var msg = "${msg}";
+		if(msg !== ""){
+			alert(msg);
+			//history.replaceState(전달할 데이터, 페이지 제목, 변경할 주소): 브라우저의 기록을 변경
+			history.replaceState('',null, null);
+		}
+	}
+</script>
+	

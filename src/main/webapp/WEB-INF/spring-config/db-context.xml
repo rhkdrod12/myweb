@@ -33,7 +33,8 @@
 	</bean>
 	
 	<!-- mapper 인터페이스 경로를 지정 -->
-	<mybatis-spring:scan base-package="com.naman.mapper"/>
+	<!-- *을 사용하여 일일이 패키지를 지정하지 않아도 가능함 -->
+	<mybatis-spring:scan base-package="com.naman.**.mapper"/>
 
 	
 </beans>
