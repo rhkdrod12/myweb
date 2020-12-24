@@ -14,7 +14,7 @@
                             <div class="input-group"><!--input2탭의 input-addon을 가져온다 -->
                                 <input type="text" class="form-control" id="userId" placeholder="아이디를 (영문포함 4~12자 이상)">
                                 <div class="input-group-addon">
-                                    <button type="button" class="btn btn-primary">아이디중복체크</button>
+                                    <button type="button" class="btn btn-primary" id="idCheckBtn">아이디중복체크</button>
                                 </div>
                             </div>
                             <span id="msgId"></span><!--자바스크립트에서 추가-->
@@ -66,7 +66,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" id="addrZipNum" placeholder="우편번호" readonly>
                                 <div class="input-group-addon">
-                                    <button type="button" class="btn btn-primary">주소찾기</button>
+                                    <button type="button" class="btn btn-primary" id="addrPopupBtn">주소찾기</button>
                                 </div>
                             </div>
                         </div>
@@ -90,8 +90,57 @@
             </div>
         </div>
     </section>
-
+	
+	
+	
+	<script type="text/javascript">
+	
+		// 승인키 : devU01TX0FVVEgyMDIwMTIyMzE1MjYzMjExMDU4NjU=
+		$("#addrPopupBtn").click(function(){
+			var pop = window.open("${pageContext.request.contextPath }/resources/popup/jusoPopup.jsp","도로명주소","width=570,height=420, scrollbars=yes, resizable=yes"); 
+		})	
+			
+		function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+			$("#addrZipNum").val(zipNo);			
+			$("#addrBasic").val(roadFullAddr);
+			$("#addrDetail").val(addrDetail)
+		}
+	
+		$("#idCheckBtn").click(function(){
+			
+			if($("#userId").val() === ""){
+				alert("아이디 규칙을 확인해주세요")
+			}
+			
+			var userId = $("#userId").val();
+			
+			//비동기 요청
+			$.ajax(
+				{
+					type:"post",
+					url:"idCheck",
+					data: JSON.stringify({
+							"userId":userId
+						}),
+					contentType: "application/json; charset=utf-8",
+				}
+			).done(function(data){
+				console.log(data);
+				
+				console.log(data.key)
+				
+			}).fail(function() {
+				
+			}).always(function(){
+				
+			})
+			
+		})	
+	
+	</script>
+	
     <script>
+    
         /*아이디 형식 검사 스크립트*/
         var id = document.getElementById("userId");
         id.onkeyup = function() {
@@ -107,6 +156,7 @@
                 document.getElementById("msgId").innerHTML = "";
             }
         }
+        
         /*비밀번호 형식 검사 스크립트*/
         var pw = document.getElementById("userPw");
         pw.onkeyup = function(){
@@ -119,6 +169,7 @@
                 document.getElementById("msgPw").innerHTML = "";
             }
         }
+        
         /*비밀번호 확인검사*/
         var pwConfirm = document.getElementById("pwConfirm");
         pwConfirm.onkeyup = function() {

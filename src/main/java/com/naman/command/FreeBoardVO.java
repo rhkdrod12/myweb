@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class FreeBoardVO {
-	int num;
+	int bno;
 	String title;
 	String writer;
 	String content;
@@ -23,9 +23,9 @@ public class FreeBoardVO {
 //		// TODO Auto-generated constructor stub
 //	}
 //	
-//	public FreeBoardVO(int num, String title, String writer, String content, Timestamp regdate, Timestamp alterdate) {
+//	public FreeBoardVO(int bno, String title, String writer, String content, Timestamp regdate, Timestamp alterdate) {
 //		super();
-//		this.num = num;
+//		this.bno = bno;
 //		this.title = title;
 //		this.writer = writer;
 //		this.content = content;
@@ -33,11 +33,11 @@ public class FreeBoardVO {
 //		this.alterdate = alterdate;
 //	}
 //
-//	public int getNum() {
-//		return num;
+//	public int getbno() {
+//		return bno;
 //	}
-//	public void setNum(int num) {
-//		this.num = num;
+//	public void setbno(int bno) {
+//		this.bno = bno;
 //	}
 //	public String getTitle() {
 //		return title;
@@ -73,7 +73,7 @@ public class FreeBoardVO {
 //
 //	@Override
 //	public String toString() {
-//		return "FreeBoardVO [num=" + num + ", title=" + title + ", writer=" + writer + ", content=" + content
+//		return "FreeBoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", content=" + content
 //				+ ", regdate=" + regdate + ", alterdate=" + alterdate + "]";
 //	}
 	
